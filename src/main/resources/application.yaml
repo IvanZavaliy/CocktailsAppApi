@@ -1,0 +1,12 @@
+ktor:
+  deployment:
+    port: 8080
+  application:
+    modules:
+      - ua.ivanzav.SerializationKt.configureSerialization
+      - ua.ivanzav.ResourcesKt.configureResources
+      - ua.ivanzav.RoutingKt.configureRouting
+
+mongodb:
+  uri: "mongodb+srv://readWriteAnyDatabase:dASLtdczH7ROCvza@educlaster.lfnrord.mongodb.net/?appName=EduClaster"
+  database: "cocktails_app_db"
