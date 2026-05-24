@@ -59,6 +59,14 @@ object MongoDatabase {
             .toList()
     }
 
+    suspend fun searchDrinksByFirstLetter(letter: String): List<DrinkDetail> {
+        val collection = database.getCollection<DrinkDetail>("drinks_details")
+        val pattern = Pattern.compile("^$letter", Pattern.CASE_INSENSITIVE)
+        return collection.find(Filters.regex("strDrink", pattern))
+            .sort(Sorts.ascending("strDrink"))
+            .toList()
+    }
+
     suspend fun getIngredientsList(): List<IngredientBrief> {
         val collection = database.getCollection<Document>("ingredients")
         val docs = collection.find()

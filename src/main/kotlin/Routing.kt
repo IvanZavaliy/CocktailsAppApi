@@ -38,11 +38,20 @@ fun Application.configureRouting() {
             
             get("/search.php") {
                 val s = call.request.queryParameters["s"]
-                if (s != null) {
-                    val drinks = MongoDatabase.searchDrinksByName(s)
-                    call.respond(DrinksFullResponse(drinks))
-                } else {
-                    call.respond(DrinksFullResponse(emptyList()))
+                val f = call.request.queryParameters["f"]
+                
+                when {
+                    s != null -> {
+                        val drinks = MongoDatabase.searchDrinksByName(s)
+                        call.respond(DrinksFullResponse(drinks))
+                    }
+                    f != null -> {
+                        val drinks = MongoDatabase.searchDrinksByFirstLetter(f)
+                        call.respond(DrinksFullResponse(drinks))
+                    }
+                    else -> {
+                        call.respond(DrinksFullResponse(emptyList()))
+                    }
                 }
             }
             

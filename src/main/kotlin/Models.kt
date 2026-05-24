@@ -95,7 +95,7 @@ data class IngredientBrief(
 
 @Serializable
 data class IngredientsBriefResponse(
-    val ingredients: List<IngredientBrief>?
+    val drinks: List<IngredientBrief>?
 )
 
 @Serializable
